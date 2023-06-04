@@ -28,9 +28,26 @@ export async function getServerSideProps() {
   };
 }
 
+const handleDelete = async (id: number) => {
+  try {
+    await axios.delete(`/api/deleteClass?id=${id}`);
+    // Perform any additional actions after successful deletion
+    console.log('Class deleted successfully');
+  } catch (error) {
+    // Handle error case
+    console.error('Error deleting class:', error);
+  }
+};
+
 export default function Home() {
   const queryClient = useQueryClient();
   const { isFetching, isError, data } = useClassrooms();
+
+  const deleteClassroomMutation = useMutation(handleDelete, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('classrooms');
+    },
+  });
 
   if (isFetching) return <Box>Fetching..</Box>;
   if (isError) return <Box>There was an error while fetching the data..</Box>;
@@ -44,6 +61,13 @@ export default function Home() {
             <Link href={`/${room.id}`}>
               <button>{room.name}</button>
             </Link>
+            <Button
+              onClick={() => {
+                deleteClassroomMutation.mutate(room.id);
+              }}
+            >
+              Delete {room.name}
+            </Button>
           </Box>
         );
       })}
