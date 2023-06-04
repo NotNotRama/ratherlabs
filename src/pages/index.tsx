@@ -1,15 +1,52 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import { Inter } from 'next/font/google';
-import styles from '@/styles/Home.module.css';
-import { Box } from '@chakra-ui/react';
+import { useClassrooms } from '@/hooks/useClassrooms';
+import Link from 'next/link';
+import axios from 'axios';
+import {
+  QueryClient,
+  dehydrate,
+  useQueryClient,
+  useMutation,
+} from 'react-query';
+import { Box, Button } from '@chakra-ui/react';
 
-const inter = Inter({ subsets: ['latin'] });
+interface Room {
+  name: string;
+  id: number;
+}
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['classrooms'], () =>
+    axios.get('http://localhost:3000/api/classrooms').then((res) => res.data)
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default function Home() {
+  const queryClient = useQueryClient();
+  const { isFetching, isError, data } = useClassrooms();
+
+  if (isFetching) return <Box>Fetching..</Box>;
+  if (isError) return <Box>There was an error while fetching the data..</Box>;
+  if (data.length === 0) return <Box>Create some rooms first</Box>;
+
   return (
     <>
-      <Box>Chakra UI</Box>
+      {data.map((room: Room) => {
+        return (
+          <Box key={room.id}>
+            <Link href={`/${room.id}`}>
+              <button>{room.name}</button>
+            </Link>
+          </Box>
+        );
+      })}
     </>
   );
 }
