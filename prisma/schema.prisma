@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+
+model Classroom {
+  id        Int      @id @default(autoincrement())
+  name String
+  capacity  Int 
+  students  Student[]
+}
+
+model Student {
+  id         Int        @id @default(autoincrement())
+  name       String
+  age        Int
+  gender     String
+  classrooms Classroom[] // Define many-to-many relationship with Classroom model
+}
