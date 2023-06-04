@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
+import { Box, Heading, FormLabel, Input, Button } from '@chakra-ui/react';
 
 interface Classroom {
   name: string;
@@ -40,28 +41,28 @@ export default function AddClassroom() {
   };
 
   return (
-    <div>
-      <h1>Add Classroom</h1>
+    <Box>
+      <Heading>Add Classroom</Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>
+        <Box>
+          <FormLabel>
             Name:
-            <input type="text" {...register('name', { required: true })} />
-          </label>
+            <Input type="text" {...register('name', { required: true })} />
+          </FormLabel>
           {errors.name && <span>This field is required</span>}
-        </div>
-        <div>
-          <label>
+        </Box>
+        <Box>
+          <FormLabel>
             Capacity:
-            <input
+            <Input
               type="number"
               {...register('capacity', { required: true })}
             />
-          </label>
+          </FormLabel>
           {errors.capacity && <span>This field is required</span>}
-        </div>
-        <button type="submit">Add Classroom</button>
+        </Box>
+        <Button type="submit">Add Classroom</Button>
       </form>
-    </div>
+    </Box>
   );
 }
