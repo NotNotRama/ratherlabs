@@ -114,6 +114,8 @@ export default function AddStudent() {
         </Box>
         <Button type="submit">Add Student</Button>
       </form>
+      {createStudentMutation.isError &&
+        'There was an error creating the classroom'}
     </Box>
   );
 }
