@@ -6,6 +6,7 @@ import { useClassrooms } from '@/hooks/useClassrooms';
 import { Box, Heading, FormLabel, Input, Button } from '@chakra-ui/react';
 import Link from 'next/link';
 import Header from '@/components/Header';
+import { useCreateStudent } from '@/hooks/useCreateStudent';
 
 interface Student {
   name: string;
@@ -25,6 +26,7 @@ export default function AddStudent() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<Student>();
   const queryClient = useQueryClient();
@@ -32,24 +34,13 @@ export default function AddStudent() {
 
   console.log('data', data);
 
-  const createStudentMutation = useMutation(
-    async (newStudent: Student) => {
-      const response = await axios.post('/api/createStudent', newStudent);
-      return response.data;
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('classrooms');
-      },
-    }
-  );
+  const createStudentMutation = useCreateStudent();
 
   const onSubmit = async (student: Student) => {
     try {
       await createStudentMutation.mutateAsync(student);
 
-      // Reset form values
-      // reset();
+      reset();
     } catch (error) {
       console.error('Error adding student:', error);
     }
