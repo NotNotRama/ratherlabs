@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useClassrooms } from '@/hooks/useClassrooms';
 
 import { Box, Heading, FormLabel, Input, Button } from '@chakra-ui/react';
+import Link from 'next/link';
+import Header from '@/components/Header';
 
 interface Student {
   name: string;

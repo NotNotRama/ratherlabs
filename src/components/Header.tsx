@@ -1,33 +1,9 @@
-import { Box, Flex, Text, Link, HStack } from '@chakra-ui/react';
-import NextLink from 'next/link';
-
-interface NavItemProps {
-  href: string;
-  label: string;
-}
-
-function NavItem({ href, label }: NavItemProps) {
-  return (
-    <Box as="li">
-      <NextLink href={href}>
-        <Link color="blue.500" fontWeight="bold">
-          {label}
-        </Link>
-      </NextLink>
-    </Box>
-  );
-}
+import { Flex, Text, HStack } from '@chakra-ui/react';
+import Link from 'next/link';
 
 function Header() {
   return (
-    <Flex alignContent="center" justify="space-between">
-      <Link href="/">
-        <HStack spacing={20}>
-          <Text fontWeight={600} fontSize={20}>
-            Rather Labs
-          </Text>
-        </HStack>
-      </Link>
+    <Flex alignContent="center">
       <HStack spacing={20}>
         <Link href="/">
           <Text fontWeight={600} fontSize={16}>

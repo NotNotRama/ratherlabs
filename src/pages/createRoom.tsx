@@ -2,6 +2,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { Box, Heading, FormLabel, Input, Button } from '@chakra-ui/react';
+import Header from '@/components/Header';
+import Link from 'next/link';
 
 interface Classroom {
   name: string;
