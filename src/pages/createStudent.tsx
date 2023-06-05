@@ -29,10 +29,7 @@ export default function AddStudent() {
     reset,
     formState: { errors },
   } = useForm<Student>();
-  const queryClient = useQueryClient();
   const { isFetching, isError, data } = useClassrooms();
-
-  console.log('data', data);
 
   const createStudentMutation = useCreateStudent();
 

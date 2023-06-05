@@ -35,19 +35,25 @@ export default function AddClassroom() {
         <Box>
           <FormLabel>
             Name:
-            <Input type="text" {...register('name', { required: true })} />
+            <Input
+              type="text"
+              {...register('name', { required: 'Name is required' })}
+            />
           </FormLabel>
-          {errors.name && <span>This field is required</span>}
+          {errors.name && <span>{errors.name.message}</span>}
         </Box>
         <Box>
           <FormLabel>
             Capacity:
             <Input
               type="number"
-              {...register('capacity', { required: true })}
+              {...register('capacity', {
+                required: 'Capacity is required',
+                min: { value: 1, message: 'Capacity must be more than zero' },
+              })}
             />
           </FormLabel>
-          {errors.capacity && <span>This field is required</span>}
+          {errors.capacity && <span>{errors.capacity.message}</span>}
         </Box>
         <Button type="submit">Add Classroom</Button>
       </form>
