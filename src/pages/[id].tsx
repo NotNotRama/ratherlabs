@@ -3,23 +3,16 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import { useClassrooms } from '@/hooks/useClassrooms';
+import { useDeleteStudent } from '@/hooks/useDeleteStudent';
 
 export default function Class() {
   const { data, isFetching, isError } = useClassrooms();
   const router = useRouter();
   const { id } = router.query;
 
-  const deleteStudentMutation = useMutation(
-    (studentId) => axios.delete(`/api/deleteStudent?id=${studentId}`),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries('classrooms');
-      },
-    }
-  );
-  const queryClient = useQueryClient();
+  const deleteStudentMutation = useDeleteStudent();
 
-  const handleDelete = async (studentId: any) => {
+  const handleDelete = async (studentId: number) => {
     try {
       await deleteStudentMutation.mutateAsync(studentId);
       console.log('Student deleted successfully');
