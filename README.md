@@ -1,38 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rather Labs take home
+
+This project is a School Management System that allows you to create and manage classrooms, add students to classrooms, and view classroom details. It is built using React, Next.js, React Query, Chakra UI, and Prisma.
+
+## Prerequisites
+
+- Node.js (v14 or higher)
+- Yarn package manager
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+git clone https://github.com/NotNotRama/ratherlabs.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+cd ratherlabs
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+3. Install the dependencies:
+```bash
+yarn
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+4. Start the development server:
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The application will be accessible at [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Screens
 
-To learn more about Next.js, take a look at the following resources:
+### Index
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The "Index" screen provides an overview of all the rooms. It displays a list of existing rooms and their basic information. From this screen, you can navigate to the details of a specific room.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Create classroom
 
-## Deploy on Vercel
+The "Create Classroom" screen allows you to create new rooms. Fill in the required details such as room name and capacity to create a new room.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Individual classroom
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The "Classroom Details" screen (located at `[id].tsx`) shows the details of a specific room, including its participants (students). It provides information about the room's capacity and a list of students belonging to that room.
+
+### Add Student
+
+The "Add Student" screen allows you to add students to the system. Specify the student's name, age, gender, and select the room to which they belong. The form includes validation to ensure the correct input format.
+
+## Technologies Used
+
+- React
+- Next.js
+- Chakra UI
+- Prisma
+- React Query
+- Axios
+
+## Demo
+
+Here are some animated GIFs showcasing the functionality of the application:
+
+### Classroom Creation
+
+![Classroom Creation](https://i.imgur.com/pvS62DI.gif)
+
+### Student Creation
+
+![Student Creation](https://i.imgur.com/y9LL2QD.gif)
+
+
