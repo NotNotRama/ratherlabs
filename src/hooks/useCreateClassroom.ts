@@ -1,10 +1,6 @@
+import { Classroom } from '@/types';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
-
-interface Classroom {
-  name: string;
-  capacity: number;
-}
 
 export function useCreateClassroom() {
   const queryClient = useQueryClient();

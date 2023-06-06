@@ -8,12 +8,7 @@ import { useEffect } from 'react';
 import Loading from '@/components/Loading';
 import Error from '@/components/Error';
 import { Empty } from '@/components/Empty';
-
-interface Room {
-  name: string;
-  id: number;
-  capacity: number;
-}
+import { Classroom } from '@/types';
 
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
@@ -56,7 +51,7 @@ export default function Home() {
         justifyItems="center"
         overflowY="auto"
       >
-        {data.map((room: Room) => {
+        {data.map((room: Classroom) => {
           return (
             <GridItem key={room.id}>
               <Flex

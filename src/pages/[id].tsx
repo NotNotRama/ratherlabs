@@ -4,6 +4,7 @@ import { useClassrooms } from '@/hooks/useClassrooms';
 import { useDeleteStudent } from '@/hooks/useDeleteStudent';
 import { Button, Flex, Grid, GridItem, Text, Heading } from '@chakra-ui/react';
 import { Empty } from '@/components/Empty';
+import { Classroom } from '@/types';
 
 export default function Class() {
   const { data, isFetching, isError } = useClassrooms();
@@ -24,13 +25,13 @@ export default function Class() {
   if (isFetching) return <div>Fetching data..</div>;
   if (isError) return <div>There was an error fetching the data</div>;
 
-  const room = data.find((room: any) => room.id === Number(id));
-  if (!room) return <div>Room not found</div>;
+  const room = data.find((room: Classroom) => room.id === Number(id));
+  if (!room) return <Empty str="Room not found" />;
   if (room.students.length === 0)
     return <Empty str="There are no students in this room" />;
 
   return (
-    <Flex bg="gray.700" flexDir="column">
+    <Flex bg="gray.700" flexDir="column" alignItems="center">
       <Heading color="whiteAlpha.900">{room.name}</Heading>
       <Grid
         templateColumns="repeat(auto-fit, minmax(500px, 1fr))"

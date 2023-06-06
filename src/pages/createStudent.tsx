@@ -11,20 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useClassrooms } from '@/hooks/useClassrooms';
 import { useCreateStudent } from '@/hooks/useCreateStudent';
-
-interface Student {
-  name: string;
-  age: number;
-  gender: string;
-  room: string;
-}
-
-interface Classroom {
-  id: number;
-  name: string;
-  capacity: number;
-  students: Student[];
-}
+import { Classroom, Student } from '@/types';
 
 export default function AddStudent() {
   const {

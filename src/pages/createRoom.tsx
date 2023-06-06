@@ -10,11 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { useCreateClassroom } from '@/hooks/useCreateClassroom';
-
-interface Classroom {
-  name: string;
-  capacity: number;
-}
+import { Classroom } from '@/types';
 
 export default function AddClassroom() {
   const {

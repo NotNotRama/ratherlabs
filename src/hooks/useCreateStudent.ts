@@ -1,12 +1,6 @@
+import { Student } from '@/types';
 import axios from 'axios';
 import { useMutation, useQueryClient } from 'react-query';
-
-interface Student {
-  name: string;
-  age: number;
-  gender: string;
-  room: string;
-}
 
 export function useCreateStudent() {
   const queryClient = useQueryClient();
