@@ -2,7 +2,7 @@ import { useClassrooms } from '@/hooks/useClassrooms';
 import Link from 'next/link';
 import axios from 'axios';
 import { QueryClient, dehydrate } from 'react-query';
-import { Box, Text, Button, Flex, Grid, GridItem } from '@chakra-ui/react';
+import { Text, Button, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { useDeleteClassroom } from '@/hooks/useDeleteClassroom';
 import { useEffect } from 'react';
 import Loading from '@/components/Loading';
