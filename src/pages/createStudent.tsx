@@ -12,6 +12,8 @@ import {
 import { useClassrooms } from '@/hooks/useClassrooms';
 import { useCreateStudent } from '@/hooks/useCreateStudent';
 import { Classroom, Student } from '@/types';
+import Loading from '@/components/Loading';
+import Error from '@/components/Error';
 
 export default function AddStudent() {
   const {
@@ -20,7 +22,7 @@ export default function AddStudent() {
     reset,
     formState: { errors },
   } = useForm<Student>();
-  const { isFetching, isError, data } = useClassrooms();
+  const { isLoading, isError, data } = useClassrooms();
 
   const createStudentMutation = useCreateStudent();
 
@@ -42,8 +44,8 @@ export default function AddStudent() {
     }
   };
 
-  if (isFetching) return <div>Fetching data..</div>;
-  if (isError) return <div>There was an error fetching the data</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   return (
     <Flex

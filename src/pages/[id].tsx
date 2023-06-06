@@ -5,9 +5,11 @@ import { useDeleteStudent } from '@/hooks/useDeleteStudent';
 import { Button, Flex, Grid, GridItem, Text, Heading } from '@chakra-ui/react';
 import { Empty } from '@/components/Empty';
 import { Classroom } from '@/types';
+import Loading from '@/components/Loading';
+import Error from '@/components/Error';
 
 export default function Class() {
-  const { data, isFetching, isError } = useClassrooms();
+  const { data, isLoading, isError } = useClassrooms();
   const router = useRouter();
   const { id } = router.query;
 
@@ -21,9 +23,8 @@ export default function Class() {
       console.error('Error deleting student:', error);
     }
   };
-
-  if (isFetching) return <div>Fetching data..</div>;
-  if (isError) return <div>There was an error fetching the data</div>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
 
   const room = data.find((room: Classroom) => room.id === Number(id));
   if (!room) return <Empty str="Room not found" />;
