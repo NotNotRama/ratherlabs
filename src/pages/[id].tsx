@@ -4,7 +4,7 @@ import { useClassrooms } from '@/hooks/useClassrooms';
 import { useDeleteStudent } from '@/hooks/useDeleteStudent';
 import { Button, Flex, Grid, GridItem, Text, Heading } from '@chakra-ui/react';
 import { Empty } from '@/components/Empty';
-import { Classroom } from '@/types';
+import { Classroom, Student } from '@/types';
 import Loading from '@/components/Loading';
 import Error from '@/components/Error';
 
@@ -44,7 +44,7 @@ export default function Class() {
         justifyItems="center"
         overflowY="auto"
       >
-        {room.students.map((student: any) => (
+        {room.students.map((student: Student) => (
           <GridItem key={student.id}>
             <Flex
               key={student.id}
