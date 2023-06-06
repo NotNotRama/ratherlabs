@@ -3,21 +3,33 @@ import Link from 'next/link';
 
 function Header() {
   return (
-    <Flex alignContent="center">
-      <HStack spacing={20}>
+    <Flex align="center" py={4} px={8} bg="gray.800" color="white">
+      <HStack spacing={6}>
         <Link href="/">
-          <Text fontWeight={600} fontSize={16}>
+          <Text
+            fontWeight={600}
+            fontSize="md"
+            _hover={{ textDecoration: 'underline' }}
+          >
             Home
           </Text>
         </Link>
         <Link href="/createRoom">
-          <Text fontWeight={600} fontSize={16}>
-            Create classroom
+          <Text
+            fontWeight={600}
+            fontSize="md"
+            _hover={{ textDecoration: 'underline' }}
+          >
+            Create Classroom
           </Text>
         </Link>
         <Link href="/createStudent">
-          <Text fontWeight={600} fontSize={16}>
-            Add student
+          <Text
+            fontWeight={600}
+            fontSize="md"
+            _hover={{ textDecoration: 'underline' }}
+          >
+            Add Student
           </Text>
         </Link>
       </HStack>

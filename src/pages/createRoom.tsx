@@ -1,5 +1,14 @@
 import { useForm } from 'react-hook-form';
-import { Box, Heading, FormLabel, Input, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  FormLabel,
+  Input,
+  Button,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+} from '@chakra-ui/react';
 
 import { useCreateClassroom } from '@/hooks/useCreateClassroom';
 
@@ -29,22 +38,25 @@ export default function AddClassroom() {
   };
 
   return (
-    <Box>
-      <Heading>Add Classroom</Heading>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Box>
-          <FormLabel>
-            Name:
+    <Flex
+      w="100vw"
+      h="100vh"
+      justifyContent="center"
+      alignItems="center"
+      bg="gray.700"
+    >
+      <Box bg="white" p={8} borderRadius="md" boxShadow="md">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormControl isInvalid={!!errors.name}>
+            <FormLabel>Name:</FormLabel>
             <Input
               type="text"
               {...register('name', { required: 'Name is required' })}
             />
-          </FormLabel>
-          {errors.name && <span>{errors.name.message}</span>}
-        </Box>
-        <Box>
-          <FormLabel>
-            Capacity:
+            <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+          </FormControl>
+          <FormControl isInvalid={!!errors.capacity} mt={4}>
+            <FormLabel>Capacity:</FormLabel>
             <Input
               type="number"
               {...register('capacity', {
@@ -52,13 +64,18 @@ export default function AddClassroom() {
                 min: { value: 1, message: 'Capacity must be more than zero' },
               })}
             />
-          </FormLabel>
-          {errors.capacity && <span>{errors.capacity.message}</span>}
-        </Box>
-        <Button type="submit">Add Classroom</Button>
-      </form>
-      {createClassroomMutation.isError &&
-        'There was an error creating the classroom'}
-    </Box>
+            <FormErrorMessage>{errors.capacity?.message}</FormErrorMessage>
+          </FormControl>
+          <Button type="submit" mt={6} colorScheme="blue">
+            Add Classroom
+          </Button>
+        </form>
+        {createClassroomMutation.isError && (
+          <Box mt={4} color="red.500">
+            There was an error creating the classroom
+          </Box>
+        )}
+      </Box>
+    </Flex>
   );
 }

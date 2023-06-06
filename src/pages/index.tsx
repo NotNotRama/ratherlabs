@@ -5,6 +5,9 @@ import { QueryClient, dehydrate } from 'react-query';
 import { Box, Text, Button, Flex, Grid, GridItem } from '@chakra-ui/react';
 import { useDeleteClassroom } from '@/hooks/useDeleteClassroom';
 import { useEffect } from 'react';
+import Loading from '@/components/Loading';
+import Error from '@/components/Error';
+import { Empty } from '@/components/Empty';
 
 interface Room {
   name: string;
@@ -27,48 +30,61 @@ export async function getServerSideProps() {
 }
 
 export default function Home() {
-  const { isFetching, isError, data } = useClassrooms();
+  const { isLoading, isError, data } = useClassrooms();
 
   const deleteClassroomMutation = useDeleteClassroom();
 
   useEffect(() => {
     if (deleteClassroomMutation.isError) {
-      alert('there was an error deleting the classroom');
+      alert('There was an error deleting the classroom');
     }
   }, [deleteClassroomMutation]);
 
-  if (isFetching) return <Box>Fetching..</Box>;
-  if (isError) return <Box>There was an error while fetching the data..</Box>;
-  if (data.length === 0) return <Box>Create some rooms first</Box>;
+  if (isLoading) return <Loading />;
+  if (isError) return <Error />;
+  if (data.length === 0) return <Empty str="No rooms" />;
 
   return (
     <>
       <Grid
         templateColumns="repeat(auto-fit, minmax(500px, 1fr))"
         gap={4}
-        bg={'black'}
+        bg="gray.700"
         w="100vw"
         h="100vh"
+        pt={20}
         justifyItems="center"
+        overflowY="auto"
       >
         {data.map((room: Room) => {
           return (
             <GridItem key={room.id}>
               <Flex
-                key={room.id}
                 flexDir="column"
                 alignItems="center"
-                bg={'red'}
-                p={10}
+                bg="whiteAlpha.900"
+                p={6}
+                borderRadius="md"
+                boxShadow="md"
+                fontFamily="body"
+                fontSize="md"
+                color="gray.800"
               >
                 <Link href={`/${room.id}`}>
-                  <button>{room.name}</button>
+                  <Button variant="link" fontSize="xl">
+                    {room.name}
+                  </Button>
                 </Link>
-                <Text>Capacity: {room.capacity}</Text>
+                <Text fontSize="lg" mt={2}>
+                  Capacity: {room.capacity}
+                </Text>
                 <Button
                   onClick={() => {
                     deleteClassroomMutation.mutate(room.id);
                   }}
+                  colorScheme="red"
+                  mt={4}
+                  fontSize="md"
                 >
                   Delete
                 </Button>
