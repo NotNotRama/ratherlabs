@@ -24,6 +24,8 @@ export async function getServerSideProps() {
   };
 }
 
+// test comment
+
 export default function Home() {
   const { isLoading, isError, data } = useClassrooms();
 
